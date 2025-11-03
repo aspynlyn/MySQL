@@ -210,3 +210,43 @@ SET profiling = 0;
 
 -- 프로파일링 할 쿼리 실행 후 확인
 SHOW PROFILES;
+
+
+/*
+모든 배우의 배우 ID, 이름 및 성을 검색
+성 기준으로 정렬한 다음 이름 기준으로 정렬
+*/
+
+SELECT actor_id, first_name, last_name
+FROM actor
+ORDER BY last_name, first_name;
+
+/*
+성이 'WILLIAMS'또는 'DAVIS'인 모든 배우의 배우 ID,
+이름 및 성 검색
+*/
+
+SELECT actor_id, first_name, last_name
+FROM actor
+WHERE last_name = 'WILLIAMS'
+OR last_name = 'DAVIS';
+
+/*
+rental테이블에서 2005년 7월 5일 영화를 대여한 고객의 id(rental.rental_date열 사용)
+각 고객 id는 하나의 행을 포함
+*/
+
+SELECT customer_idssssss
+FROM rental
+WHERE rental_date BETWEEN '2005-07-05 00:00:00' AND '2005-07-05 23:59:59';
+
+/* 
+2005년 6월 14일 이외의 날짜에 대여한 영화에 대한 모든 고객의 이메일 주소
+*/
+
+SELECT c.email
+FROM customer c
+JOIN rental r
+ON c.customer_id = r.customer_id
+WHERE r.rental_date <= '2005-06-14 00:00:00'
+OR r.rental_date > '2005-06-14 23:59:59';
