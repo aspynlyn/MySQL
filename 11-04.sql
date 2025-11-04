@@ -107,4 +107,76 @@ FROM customer c
 JOIN address a
 ON c.address_id = a.address_id;
 
+-- 모든 고객의 이름, 성, 살고있는 도시
+
+SELECT c.first_name, c.last_name, cc.city
+FROM address a
+JOIN city cc
+ON a.city_id = cc.city_id
+JOIN customer c
+ON a.address_id = c.address_id;
+
+
+-- 캘리포니아에 거주하는 모든 고객의 이름, 성, 주소 및 도시 조회
+
+SELECT c.first_name, c.last_name, a.address, cc.city
+FROM address a
+JOIN city cc
+ON a.city_id = cc.city_id
+JOIN customer c
+ON a.address_id = c.address_id
+WHERE a.district = 'California';
+
+
+-- Cate McQueen 또는 Cuba Birch가 출연한 모든 영화 조회
+SELECT f.title
+FROM film f
+JOIN film_actor fa
+ON f.film_id = fa.film_id
+WHERE fa.actor_id 
+IN (SELECT actor_id
+	FROM actor
+	WHERE (first_name = 'CUBA' AND last_name = 'BIRCH')
+	OR (first_name = 'CATE' AND last_name = 'MCQUEEN')
+);
+
+
+-- CATE MCQUEEN과 CUBA BIRCH가 함께 출연한 모든 영화 조회
+
+SELECT f.film_id, f.title
+FROM film f
+JOIN film_actor fa
+ON f.film_id = fa.film_id
+JOIN actor a 
+ON fa.actor_id = a.actor_id
+WHERE (first_name = 'CUBA' AND last_name = 'BIRCH')
+OR (first_name = 'CATE' AND last_name = 'MCQUEEN')
+GROUP BY f.title, f.film_id
+HAVING COUNT(a.actor_id) = 2;
+
+-- 고객의 영화 대여 횟수가 정확히 20번 대여를 한 고객 조회
+
+SELECT c.first_name, c.last_name
+FROM customer c
+WHERE 20 = (SELECT COUNT(1)
+				FROM rental r
+				WHERE r.customer_id = c.customer_id);
+
+
+-- 1.
+SELECT c.first_name, c.last_name, c.customer_id
+FROM customer c;
+
+-- 2.
+SELECT COUNT(1) cnt, r.customer_id
+FROM rental r
+WHERE r.customer_id
+GROUP BY r.customer_id
+HAVING cnt = 20;
+
+-- 3. 1, 2번 결과물 조합
+
+
+
+
 
