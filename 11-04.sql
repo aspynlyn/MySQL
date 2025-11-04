@@ -74,11 +74,37 @@ FROM rental
 WHERE return_date IS NULL;
 
 /*
-고객 번호가 5가 아니면서 결제날짜가 '2005-08-23'이거나 결제금액이 8달러 이상인 payment_id를 조회
+고객 번호가 5가 아니면서 결제날짜가 '2005-08-23'이거나 결제금액이 8달러 초과인 payment_id를 조회
 */
 
 SELECT payment_id
 FROM payment
 WHERE customer_id != 5
-AND ((payment_date BETWEEN '2005-08-23' AND '2005-08-23 23:59:59') OR amount >= 8.00);
+AND ((payment_date BETWEEN '2005-08-23' AND '2005-08-23 23:59:59') OR amount > 8.00);
+
+/*
+payment테이블에서 금액이 1.98, 7.98 또는 9.98인 모든 행 조회
+*/
+
+SELECT *
+FROM payment
+WHERE amount IN (1.98, 7.98, 9.98);
+
+/*
+성의 두번째 위치에 A가 있고 A다음에 W가 있는 모든 고객 조회
+*/
+
+SELECT *
+FROM customer
+WHERE last_name LIKE '_AW%';
+
+/*
+모든 고객의 성,, 이름, 주소 조회
+*/
+
+SELECT c.last_name, c.first_name, a.address
+FROM customer c
+JOIN address a
+ON c.address_id = a.address_id;
+
 
