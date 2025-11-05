@@ -36,7 +36,7 @@ FROM customer
 WHERE last_name >= 'FA'
 AND last_name < 'FS';
 
-/*
+/*       
 영화 제목에 'PET'이 포함된 영화의 등급과 같은 영화들의 제목과 등급
 */
 
