@@ -48,3 +48,10 @@ WHERE hire_date BETWEEN '1989-01-01' AND '1989-12-31'
 SELECT *
 FROM emp_access_logs
 WHERE door = 'B';
+
+# 입사일자가 1994년 1월 1일부터 2000년 12월 31일까지인 사원들의 이름과 성
+
+EXPLAIN
+SELECT first_name, last_name
+FROM employees USE INDEX (i_입사일자)
+WHERE hire_date BETWEEN '1994-01-01' AND '2000-12-31';
