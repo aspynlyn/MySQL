@@ -170,6 +170,12 @@ SELECT *
 FROM employees
 WHERE emp_no BETWEEN 11000 AND 11009;
 
+-- 성별 기준으로 몇명의 사원이 있는지 출력하는 쿼리
+SELECT gender, COUNT(1) AS count
+FROM employees
+GROUP BY gender;
 
-
-
+-- 사용여부 usc_yn값이 1인 데이터의 row수
+SELECT COUNT(1)
+FROM salaries
+WHERE use_yn = '1';
