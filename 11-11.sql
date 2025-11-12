@@ -33,7 +33,7 @@ BEGIN
 	SELECT COUNT(1) INTO num FROM 법인고객2 WHERE 고객번호 = NEW.고객번호;
 
 	if num != 0 then
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '법인 고객2에 존재하는 중복된 고객번호입니다.';
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '법인 고객2에 존재하는 고객번호입니다.';
 	END if;
 
 END; $$
@@ -52,7 +52,7 @@ BEGIN
 	SELECT COUNT(1) INTO num FROM 법인고객2 WHERE 고객번호 = NEW.고객번호;
 
 	if num != 0 then
-		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '법인 고객2에 존재하는 중복된 고객번호입니다.';
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = '법인 고객2에 존재하는 고객번호입니다.';
 	END if;
 
 END; $$
